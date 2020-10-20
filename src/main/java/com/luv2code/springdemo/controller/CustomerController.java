@@ -38,14 +38,25 @@ public class CustomerController {
 		theModel.addAttribute("customer", thecustomer);
 
 		return "customer-form";
-     }
+	}
 
 	@PostMapping("/saveCustomer")
 	public String saveCustomer(@ModelAttribute("customer") Customer thecustomer) {
-		
+
 		customerservice.saveCustomer(thecustomer);
 		return "redirect:/customer/list";
-		
+
 	}
-	
+
+	@GetMapping("/showFormForUpdate")
+	public String showFormForUpdate(@ModelAttribute("customerId") int theCustomerId, Model theModel) {
+
+	    Customer customer = customerservice.getCustomers(theCustomerId);
+
+	    theModel.addAttribute("customer", customer);
+
+		return "customer-form";
+
+	}
+
 }
